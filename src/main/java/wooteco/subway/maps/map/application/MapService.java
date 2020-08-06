@@ -1,5 +1,6 @@
 package wooteco.subway.maps.map.application;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wooteco.subway.maps.line.application.LineService;
 import wooteco.subway.maps.line.domain.Line;
@@ -13,15 +14,18 @@ import wooteco.subway.maps.map.dto.PathResponseAssembler;
 import wooteco.subway.maps.station.application.StationService;
 import wooteco.subway.maps.station.domain.Station;
 import wooteco.subway.maps.station.dto.StationResponse;
-import org.springframework.stereotype.Service;
+import wooteco.subway.members.member.domain.LoginMember;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class MapService {
+    private static final int DEFAULT_AGE = 20;
+
     private LineService lineService;
     private StationService stationService;
     private PathService pathService;
@@ -43,12 +47,13 @@ public class MapService {
         return new MapResponse(lineResponses);
     }
 
-    public PathResponse findPath(Long source, Long target, PathType type) {
+    public PathResponse findPath(Long source, Long target, PathType type, Optional<LoginMember> member) {
         List<Line> lines = lineService.findLines();
         SubwayPath subwayPath = pathService.findPath(lines, source, target, type);
         Map<Long, Station> stations = stationService.findStationsByIds(subwayPath.extractStationId());
 
-        return PathResponseAssembler.assemble(subwayPath, stations);
+        return member.map(value -> PathResponseAssembler.assemble(subwayPath, stations, value.getAge())).
+                orElseGet(() -> PathResponseAssembler.assemble(subwayPath, stations, DEFAULT_AGE));
     }
 
     private Map<Long, Station> findStations(List<Line> lines) {
