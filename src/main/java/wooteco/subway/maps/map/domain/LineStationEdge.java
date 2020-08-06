@@ -6,10 +6,12 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 public class LineStationEdge extends DefaultWeightedEdge {
     private LineStation lineStation;
     private Long lineId;
+    private int extraFare;
 
-    public LineStationEdge(LineStation lineStation, Long lineId) {
+    public LineStationEdge(LineStation lineStation, Long lineId, int extraFare) {
         this.lineStation = lineStation;
         this.lineId = lineId;
+        this.extraFare = extraFare;
     }
 
     public LineStation getLineStation() {
@@ -18,6 +20,10 @@ public class LineStationEdge extends DefaultWeightedEdge {
 
     public Long getLineId() {
         return lineId;
+    }
+
+    public int getExtraFare() {
+        return extraFare;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class MapController {
         return ResponseEntity.ok(mapService.findPath(source, target, type, Optional.empty()));
     }
 
-    // TODO: 2020/08/06 인증에 대한 정확한 지식이 없어서, 임시변통으로 라우터를 2개로 나눴음. 이후 로그인/비로그인 모두 하나로 요청을 보내도록 로직 수정할 예정. 
+    // TODO: 2020/08/06 인증에 대한 정확한 지식이 없어서, 임시변통으로 라우터를 2개로 나눴음. 이후 로그인/비로그인 모두 하나로 요청을 보내도록 로직 수정할 예정.
     @GetMapping("/paths/login")
     public ResponseEntity<PathResponse> findPath(@RequestParam Long source, @RequestParam Long target,
                                                  @RequestParam PathType type, @AuthenticationPrincipal LoginMember member) {

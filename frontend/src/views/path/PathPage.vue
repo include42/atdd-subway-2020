@@ -220,7 +220,6 @@ export default {
     ...mapActions([SEARCH_PATH, SEARCH_PATH_WITH_LOGIN, FETCH_STATIONS]),
     async onSearchResult() {
       try {
-        console.log(this.accessToken);
         if(this.accessToken){
           await this.searchPathWithLogin(this.path)
         }else{

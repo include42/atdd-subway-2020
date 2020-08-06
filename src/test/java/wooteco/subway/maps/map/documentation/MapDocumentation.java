@@ -26,10 +26,7 @@ import wooteco.subway.maps.station.dto.StationResponse;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.mockito.Mockito.when;
@@ -67,7 +64,7 @@ public class MapDocumentation extends Documentation {
                 new StationResponse(2L, "잠실역", LocalDateTime.now(),LocalDateTime.now())
         );
 
-        when(mapService.findPath(1L,2L,PathType.DURATION)).thenReturn(new PathResponse(stationResponses, 3,4,1250));
+        when(mapService.findPath(1L,2L,PathType.DURATION, Optional.empty())).thenReturn(new PathResponse(stationResponses, 3,4,1250));
 
         given().log().all().
                 header("authorization", "Bearer " + tokenResponse.getAccessToken()).
