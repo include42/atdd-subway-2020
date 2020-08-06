@@ -47,7 +47,7 @@ public class SubwayPath {
             fare += (int) ((Math.ceil((distance - 1) / 8) + 1) * 100);
             fare += ((distance - 50) / 8)*100;
         }
-        return calculateAgeFare(fare, age) + calculateExtraFare();
+        return calculateAgeFare(fare + calculateExtraFare(), age);
     }
 
     private int calculateAgeFare(int fare, int age) {
@@ -67,6 +67,6 @@ public class SubwayPath {
         return lineStationEdges.
                 stream().
                 map(LineStationEdge::getExtraFare).
-                reduce(0, Integer::sum);
+                reduce(0, Integer::max);
     }
 }
