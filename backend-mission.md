@@ -135,6 +135,11 @@ Jgrapht의 KShortestPaths 활용 방법은 [JgraphTest](https://github.com/woowa
 
 <br/>
 
+### 문서화
+[FavoriteDocumentation](https://github.com/woowacourse/atdd-subway-2020/blob/master/src/test/java/wooteco/subway/members/favorite/documentation/FavoriteDocumentation.java) 을 참고해서 문서화 테스트를 작성하세요.  
+
+<br/>
+
 ### 5km 마다 100원 추가
 ```java
 private int calculateOverFare(int distance) {
