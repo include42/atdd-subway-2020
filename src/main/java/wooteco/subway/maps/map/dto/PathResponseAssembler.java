@@ -16,6 +16,9 @@ public class PathResponseAssembler {
 
         int distance = subwayPath.calculateDistance();
 
-        return new PathResponse(stationResponses, subwayPath.calculateDuration(), distance);
+        //// TODO: 2020/08/06 여기서 요금 관련 로직 넣어주기
+        int fare = 1250;
+
+        return new PathResponse(stationResponses, subwayPath.calculateDuration(), distance, 1250);
     }
 }
